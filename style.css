@@ -1,0 +1,188 @@
+:root {
+    --primary: #4834d4;
+    --secondary: #686de0;
+    --bg: #f1f2f6;
+    --white: #ffffff;
+    --danger: #eb4d4b;
+    --success: #6ab04c;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg);
+    margin: 0;
+    padding: 20px;
+    color: #2d3436;
+}
+
+/* --- LAYOUT UTAMA --- */
+.container {
+    width: 95%;
+    max-width: 1600px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- HEADER BARU DENGAN GAMBAR --- */
+.header {
+    position: relative; /* Penting untuk overlay */
+    /* Ganti URL di bawah dengan nama file gambar Anda */
+    background-image: url('images/background.png'); 
+    background-size: cover;
+    background-position: center;
+    padding: 80px 20px; /* Padding diperbesar agar gambar terlihat luas */
+    text-align: center;
+    color: white;
+}
+
+/* Membuat lapisan gelap transparan agar teks terbaca */
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.6); /* Hitam transparansi 60% */
+    z-index: 1;
+}
+
+/* Memastikan teks ada di atas lapisan gelap */
+.header h1, .header p {
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.header h1 { margin: 0; font-size: 3rem; letter-spacing: 1px; }
+.header p { margin-top: 10px; font-size: 1.2rem; font-weight: 300; }
+
+/* --- CONTENT AREA --- */
+.content-area { padding: 40px; }
+
+/* --- GRID SYSTEM --- */
+.gejala-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.gejala-grid input[type="checkbox"] { display: none; }
+
+.gejala-card {
+    background: #fff;
+    border: 2px solid #dfe4ea;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #535c68;
+}
+
+.gejala-card:hover {
+    border-color: var(--secondary);
+    background: #fdfdfd;
+}
+
+.gejala-card i {
+    width: 30px;
+    color: #bdc3c7;
+    font-size: 1.2rem;
+}
+
+/* Checked State */
+.gejala-grid input[type="checkbox"]:checked + label {
+    border-color: var(--primary);
+    background: rgba(72, 52, 212, 0.05);
+    color: var(--primary);
+    font-weight: 600;
+}
+.gejala-grid input[type="checkbox"]:checked + label i { color: var(--primary); }
+
+/* --- BUTTON --- */
+.btn-action {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 15px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(72, 52, 212, 0.3);
+    transition: 0.3s;
+}
+
+.btn-action:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(72, 52, 212, 0.4);
+}
+
+/* --- HASIL DIAGNOSA --- */
+#result-section {
+    display: none;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 2px dashed #dfe4ea;
+}
+
+.result-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: #2d3436;
+}
+
+.result-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.disease-card {
+    width: 300px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    border: 1px solid #eee;
+    animation: popUp 0.5s ease;
+}
+
+.disease-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background-color: #ddd;
+}
+
+.disease-info { padding: 20px; text-align: center; }
+.disease-name { font-size: 1.4rem; font-weight: 700; color: var(--danger); margin-bottom: 10px; }
+.disease-desc { font-size: 0.9rem; color: #636e72; line-height: 1.5; }
+
+.safe-card {
+    border-top: 5px solid var(--success);
+    padding: 30px;
+    text-align: center;
+    background: #f9fff9;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+@keyframes popUp {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}

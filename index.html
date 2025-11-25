@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Pakar Diagnosa Kucing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1><i class="fas fa-user-md"></i> Cek Penyakit Kucing</h1>
+        <p>Sistem Pakar Diagnosa Penyakit Kucing Berbasis Web</p>
+        <p>Moch. Gilang Elang Perkasa (2240304011)</p>
+    </div>
+
+    <div class="content-area">
+        <h3 style="text-align:center; color:#636e72; margin-bottom:30px;">Pilih Gejala yang Terlihat:</h3>
+        
+        <form id="formDiagnosa">
+            <div class="gejala-grid">
+                <input type="checkbox" id="G1"><label for="G1" class="gejala-card"><i class="fas fa-paw"></i> Bulu rontok telinga</label>
+                <input type="checkbox" id="G2"><label for="G2" class="gejala-card"><i class="fas fa-paw"></i> Kerak putih telinga</label>
+                <input type="checkbox" id="G3"><label for="G3" class="gejala-card"><i class="fas fa-hand-paper"></i> Sering menggaruk</label>
+                <input type="checkbox" id="G4"><label for="G4" class="gejala-card"><i class="fas fa-allergies"></i> Penebalan kulit</label>
+                <input type="checkbox" id="G5"><label for="G5" class="gejala-card"><i class="fas fa-certificate"></i> Kerak kuning abu</label>
+                
+                <input type="checkbox" id="G6"><label for="G6" class="gejala-card"><i class="fas fa-thermometer-full"></i> Demam (41-42°C)</label>
+                <input type="checkbox" id="G7"><label for="G7" class="gejala-card"><i class="fas fa-poo"></i> Diare</label>
+                <input type="checkbox" id="G8"><label for="G8" class="gejala-card"><i class="fas fa-tint-slash"></i> Dehidrasi</label>
+                <input type="checkbox" id="G9"><label for="G9" class="gejala-card"><i class="fas fa-sad-tear"></i> Depresi hebat</label>
+                <input type="checkbox" id="G10"><label for="G10" class="gejala-card"><i class="fas fa-viruses"></i> Muntah</label>
+                <input type="checkbox" id="G12"><label for="G12" class="gejala-card"><i class="fas fa-utensils"></i> Hilang nafsu makan</label>
+
+                <input type="checkbox" id="G13"><label for="G13" class="gejala-card"><i class="fas fa-head-side-cough"></i> Bersin</label>
+                <input type="checkbox" id="G14"><label for="G14" class="gejala-card"><i class="fas fa-frown"></i> Depresif</label>
+                <input type="checkbox" id="G15"><label for="G15" class="gejala-card"><i class="fas fa-tint"></i> Air liur berlebih</label>
+                <input type="checkbox" id="G16"><label for="G16" class="gejala-card"><i class="fas fa-notes-medical"></i> Ingus mengental</label>
+                <input type="checkbox" id="G17"><label for="G17" class="gejala-card"><i class="fas fa-user-injured"></i> Luka mulut/hidung</label>
+                <input type="checkbox" id="G18"><label for="G18" class="gejala-card"><i class="fas fa-times-circle"></i> Tidak mau makan</label>
+
+                <input type="checkbox" id="G19"><label for="G19" class="gejala-card"><i class="fas fa-eye"></i> Mata/gusi kuning</label>
+                <input type="checkbox" id="G20"><label for="G20" class="gejala-card"><i class="fas fa-battery-quarter"></i> Lemah</label>
+                <input type="checkbox" id="G21"><label for="G21" class="gejala-card"><i class="fas fa-eye-dropper"></i> Mata bengkak merah</label>
+                <input type="checkbox" id="G22"><label for="G22" class="gejala-card"><i class="fas fa-lungs-virus"></i> Sulit bernapas</label>
+                <input type="checkbox" id="G23"><label for="G23" class="gejala-card"><i class="fas fa-procedures"></i> Anemia</label>
+
+                <input type="checkbox" id="G24"><label for="G24" class="gejala-card"><i class="fas fa-dot-circle"></i> Bercak bulat</label>
+                <input type="checkbox" id="G25"><label for="G25" class="gejala-card"><i class="fas fa-cut"></i> Botak setempat</label>
+                <input type="checkbox" id="G26"><label for="G26" class="gejala-card"><i class="fas fa-layer-group"></i> Kulit berkerak</label>
+                <input type="checkbox" id="G27"><label for="G27" class="gejala-card"><i class="fas fa-exclamation-circle"></i> Benjolan bernanah</label>
+            </div>
+
+            <button type="button" class="btn-action" onclick="jalankanDiagnosa()">ANALISA HASIL</button>
+        </form>
+
+        <div id="result-section">
+            <h2 class="result-title">Hasil Analisa Sistem</h2>
+            <div id="results-container" class="result-container"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- JAVASCRIPT LOGIC ---
+    function jalankanDiagnosa() {
+        const container = document.getElementById('results-container');
+        const section = document.getElementById('result-section');
+        container.innerHTML = "";
+        let penyakitDitemukan = false;
+
+        function tambahKartuHasil(namaPenyakit, urlGambar, deskripsi) {
+            penyakitDitemukan = true;
+            const cardHTML = `
+                <div class="disease-card">
+                    <img src="${urlGambar}" alt="${namaPenyakit}" class="disease-img">
+                    <div class="disease-info">
+                        <div class="disease-name">${namaPenyakit}</div>
+                        <div class="disease-desc">${deskripsi}</div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += cardHTML;
+        }
+
+        function cek(id) {
+            let el = document.getElementById(id);
+            return el ? el.checked : false;
+        }
+
+        // --- ATURAN PENYAKIT (RULES) ---
+        // 1. SCABIES
+        if (cek('G1') && cek('G2') && cek('G3') && cek('G4') && cek('G5')) {
+            tambahKartuHasil("SCABIES", "images/scabies.jpg", "Penyakit kulit akibat tungau, gatal hebat.");
+        }
+        // 2. DISTEMPER
+        if (cek('G6') && cek('G7') && cek('G8') && cek('G9') && cek('G10') && cek('G12')) {
+            tambahKartuHasil("DISTEMPER KUCING", "images/DISTEMPER.jpg", "Virus mematikan saluran cerna.");
+        }
+        // 3. LEPTO
+        if (cek('G7') && cek('G19') && cek('G20') && cek('G21') && cek('G22')) {
+            tambahKartuHasil("LEPTOSPIROSIS", "images/Ingus_jahat.jpg", "Bakteri menyerang ginjal/hati.");
+        }
+        // 4. LEUKIMIA
+        if (cek('G23') && cek('G24')) { 
+             tambahKartuHasil("LEUKIMIA", "images/leukimia.jpg", "Kanker darah yang menurunkan imun.");
+        }
+         // 5. RINGWORM
+         if (cek('G25') && cek('G26') && cek('G27') && cek('G24')) { 
+             tambahKartuHasil("RINGWORM", "images/ringworm.jpg", "Infeksi jamur kulit (kurap).");
+        }
+
+        // JIKA SEHAT
+        if (!penyakitDitemukan) {
+            container.innerHTML = `
+                <div class="safe-card">
+                    <h3 style="color: green;"><i class="fas fa-check-circle"></i> Tidak Terdeteksi</h3>
+                    <p>Tidak ditemukan kecocokan dengan database penyakit kami.</p>
+                </div>
+            `;
+        }
+
+        section.style.display = "block";
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
