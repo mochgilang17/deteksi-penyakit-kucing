@@ -32,7 +32,7 @@ body {
 .header {
     position: relative; /* Penting untuk overlay */
     /* Ganti URL di bawah dengan nama file gambar Anda */
-    background-image: url('images/background.png'); 
+    background-image: url('background.png'); 
     background-size: cover;
     background-position: center;
     padding: 80px 20px; /* Padding diperbesar agar gambar terlihat luas */
@@ -185,4 +185,5 @@ body {
 @keyframes popUp {
     from { opacity: 0; transform: scale(0.8); }
     to { opacity: 1; transform: scale(1); }
+
 }
